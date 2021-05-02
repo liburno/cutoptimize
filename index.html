@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ottimizzatore</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"></script>
+    <script src="pannello.js"></script>
+    <script src="ott.js"></script>
+    <script src="dom.js"></script>
+    <script src="index.js"></script>
+    
+</head>
+<body>
+    <div id="container">
+        <div id="canvas">
+        </div>
+        <div id="info">
+            <div id="menu">
+                <div class="voce"><a href="#" onclick="menuset(0)">Misure</a></div>
+                <div class="voce"><a href="#" onclick="menuset(1)">Tagli</a></div>
+                <div class="voce"><a href="#" onclick="menuset(2)">Manca</a></div>
+                <div class="voce"><a href="#" onclick="menuset(3)">Help</a></div>
+            </div>
+            <div id="pag0" class="pagina">
+                <h2>Imposta Misure
+                </h2>
+                <p class="help">
+                    Per impostare le misure scrivi nelle righe i valori (lunghezza) x (larghezza) = (quantità). puoi cambiare sigla del materiale
+                    scrivendo una riga #(sigla)
+                </p>
+                <p class="help">Verifica le misura prima di ottimizzare</p>
+                <label for="">Fogli:</label>
+                <textarea id="fogli" cols="30" rows="5" class="tarea"></textarea>
+                <label for="">Tagli:</label>
+                <textarea id="tagli" cols="30" rows="20" class="tarea"></textarea>
+                <label for="">Sp.Taglio</label>
+                <input type="number" id="spessore" class="tarea">
+                <button onclick="btottimizza()">Ottimizza</button>
+                <button onclick="btverifica()">Verifica</button>
+
+            </div>
+            <div id="pag1" class="pagina">
+                <h2>Taglio:</h2>
+                <p>Materiale: <span class="evi" id="fogliomat"></span></p>
+                <p>Dimensioni: <span class="evi" id="fogliodim"></span></p>
+               
+                <p>Nr.: <span class="evi" id="foglioid"></span></p>
+                <p>Resa: <span class="evi" id="foglioresa"></span> %</p>
+                <p>Tagli Y:</p>
+                <pre id="fogliomisure">
+                </pre>
+                
+                <p class="help">Premere freccia sx o dx per scorrere</p>
+            </div>
+            <div id="pag2" class="pagina">
+                <h2>Mancanti</h2>
+                <pre id="mancanti"></pre>
+            </div>
+            <div id="pag3" class="pagina">
+                <h2>Help</h2>
+                <p>Questo è un ottimizzatore di taglio, costruito per tagliare i fogli prima in strisce secondo la lunghezza e poi troncando</p>
+                <p>Da ogni elemento troncato si possono ricavare n altri pannelli.</p>
+                <p>Ho realizzato questo sistema per troncare i fogli in barre con un pretaglio con sega ad affondamento e quindi rifinire il tutto sul banco sega. </p>
+                <p>Il programma è scritto in "vanillajs" utilizzando la libreria grafica "p5.js". L'utilizzo è libero e non vengono tracciate informazioni sull'utilizzatore.</p>
+                <p>Il <a href="https://github.com/liburno/cutoptimize.git">codice sorgente</a> è rilasciato con licenza MIT.</p>
+                <p>Tito.</p>
+            </div>
+        </div>
+    
+    </div>
+   
+
+</body>
+</html>

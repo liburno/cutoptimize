@@ -1,0 +1,65 @@
+html,body {
+    margin:0;
+    padding:0;
+    border:0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow:hidden;
+}
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow:hidden;
+}
+#canvas {
+    width:80%;
+    height: 100vh;
+    overflow:hidden;
+
+}
+#menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+.voce {
+    padding:0px 0.5rem;
+}
+#info {
+    background-color: rgb(213, 236, 243);
+    width: 20%;
+    flex: auto;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+   
+}
+.pagina {
+    padding: 0.5rem;
+    display: none;
+}
+button {
+    display: inline;
+    margin:0.5rem;
+    font-size:1rem;
+    line-height: 1.8rem;
+}
+.tarea {
+    width:90%;
+    display: block;
+    margin:0.2rem 0rem;
+}   
+.help {
+    font-size:0.7rem;
+    color:blue;
+    font-style: italic;
+
+}
+h2 {
+    margin:0;
+    padding:0;
+}
+.evi {
+    font-size:1.2rem;
+    color:red;
+}

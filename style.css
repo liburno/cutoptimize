@@ -13,7 +13,7 @@ html,body {
     overflow:hidden;
 }
 #canvas {
-    width:80%;
+    width:75%;
     height: 100vh;
     overflow:hidden;
 
@@ -24,6 +24,11 @@ html,body {
 }
 .voce {
     padding:0px 0.5rem;
+}
+label {
+    display:block;
+    font-size:0.8rem;
+    color:blue;
 }
 #info {
     background-color: rgb(213, 236, 243);
@@ -40,18 +45,19 @@ html,body {
 }
 button {
     display: inline;
-    margin:0.5rem;
+    margin:0.2rem;
     font-size:1rem;
-    line-height: 1.8rem;
+    line-height: 1.3rem;
 }
 .tarea {
-    width:90%;
+    width:100%;
     display: block;
+    font-size:0.8rem;
     margin:0.2rem 0rem;
 }   
 .help {
     font-size:0.7rem;
-    color:blue;
+    color:brown;
     font-style: italic;
 
 }

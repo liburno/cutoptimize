@@ -5,6 +5,7 @@ class Ott {
         this.fgx = [];
         for (var t of tm.fogli) {
             var n = t.n || 1;
+            if (t.rq) n*=t.rq;
             for (var i = 0; i < n; i++) {
                 mx = mx > t.x ? mx : t.x;
                 my = my > t.y ? my : t.y;
@@ -13,7 +14,7 @@ class Ott {
                 this.fgx.push(nn);
             }
         }
-        sptaglio = tm.sptaglio;
+        sptaglio = tm.sps || 8;
         this.mx = mx;
         this.my = my;
         this.curfoglio = 0;
@@ -21,7 +22,8 @@ class Ott {
         var id = 1;
         for (var t of tm.tagli) {
             var n = t.n || 1;
-            for (var i = 0; i < n; i++) {
+            if (t.rq) n*=t.rq;
+             for (var i = 0; i < n; i++) {
                 var nn = new Pann(t.x, t.y, t.gr)
                 nn.id = id++;
                 this.tg.push(nn);

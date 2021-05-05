@@ -21,26 +21,34 @@
             <div id="menu">
                 <div class="voce"><a href="#" onclick="menuset(0)">Misure</a></div>
                 <div class="voce"><a href="#" onclick="menuset(1)">Tagli</a></div>
-                <div class="voce"><a href="#" onclick="menuset(2)">Manca</a></div>
-                <div class="voce"><a href="#" onclick="menuset(3)">Help</a></div>
+                <div class="voce"><a href="#" onclick="menuset(3)">Aiuto</a></div>
             </div>
+            
             <div id="pag0" class="pagina">
                 <h2>Imposta Misure
                 </h2>
-                <p class="help">
-                    Per impostare le misure scrivi nelle righe i valori (lunghezza) x (larghezza) = (quantità). puoi cambiare sigla del materiale
-                    scrivendo una riga #(sigla)
-                </p>
-                <p class="help">Verifica le misura prima di ottimizzare</p>
-                <label for="">Fogli:</label>
-                <textarea id="fogli" cols="30" rows="5" class="tarea"></textarea>
-                <label for="">Tagli:</label>
-                <textarea id="tagli" cols="30" rows="20" class="tarea"></textarea>
-                <label for="">Sp.Taglio</label>
-                <input type="number" id="spessore" class="tarea">
+                
+                <label for="">Schemi Salvati:</label>
+                <select name="" id="liste" class="tarea"">
+                    <option value="a">prima</option>
+                    <option value="b">sec</option>
+                    <option value="c">ter</option>
+                </select>
+                <button onclick="btcarica()">Carica</button>
+                <br>
+                <label for="">Nome Schema:</label>
+                <input type="text" id="nome" class="tarea">
+                <button onclick="btsalva()">Salva</button>
                 <button onclick="btottimizza()">Ottimizza</button>
-                <button onclick="btverifica()">Verifica</button>
-
+                <p class="help">
+                    Per impostare le misure (in mm.) scrivi nelle righe i valori (lunghezza) x (larghezza) = (quantità). puoi cambiare sigla del materiale
+                    scrivendo una riga #(sigla) e le ripetizioni della stessa
+                </p>
+                <p class="help">se devi inserire le misure di un foglio scrivi come un pannello ma precedi con !: !(lunghezza)x(larghezza)=(qt)</p>
+                <p class="help">il comando "!sps xx" da lo spessore della lama/sfrido, default 8mm</p>
+                
+                <label for="">Dati:</label>
+                <textarea id="dati"  rows="200" class="tarea"></textarea>
             </div>
             <div id="pag1" class="pagina">
                 <h2>Taglio:</h2>
@@ -52,12 +60,12 @@
                 <p>Tagli Y:</p>
                 <pre id="fogliomisure">
                 </pre>
-                
                 <p class="help">Premere freccia sx o dx per scorrere</p>
-            </div>
-            <div id="pag2" class="pagina">
+           
                 <h2>Mancanti</h2>
                 <pre id="mancanti"></pre>
+            </div>
+            <div id="pag2" class="pagina">
             </div>
             <div id="pag3" class="pagina">
                 <h2>Help</h2>

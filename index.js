@@ -3,41 +3,19 @@ var CW, CH;
 var scala, ox, oy;
 var ott; // ottimizzatore
 var sptaglio = 8;
-var esempio= {
-    fogli: `
-#p25
-3050x1850=5 // prova 
-`,
-    tagli: `
-#p25
-900x600=6
-600x600=2
-600x80=4
-450x600=2
-400x400=4
-720x400=4
-600x120=5
-400x120=5
-400x115
-`,
-    sptaglio: 8
-}
+
 
 
 
 function preload() {
-    
-    var tm = getStorage('lastdata',esempio);
-    getel("spessore").value = tm.sptaglio;
-    getel("fogli").value = tm.fogli;
-    getel("tagli").value = tm.tagli
+    getinidata();  
     menuset(0);
 }
 
 
 // dimensiona la finestra grafica
 function checksize() {
-    CW = windowWidth * .8;
+    CW = windowWidth * .75;
     CH = windowHeight;
     if (ott) {
         scala = CW / ott.mx;

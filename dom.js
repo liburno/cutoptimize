@@ -7,8 +7,14 @@ var setStorage = (el, v) => localStorage.setItem(el, JSON.stringify(v))
 var curpage = 0;
 var liste = {
     nome: '.lastdata',
-    list: []
+    list: [],
+    listino:`* 3000x2000 prova generico`
+    
 }
+
+var klistino={};
+
+
 
 var esempio = `
 !sps=8
@@ -34,11 +40,22 @@ var esempio = `
 1000 x 130 = 1 
 1000 x 80 = 2 
 `
+
+function parseListino() {
+    klistino={};
+    var vv = liste.listino.split(/\r?\n\r?/);
+    for (var v of vv) {
+        var r = /^\s*([\w\*]+)\s*([\d\.]+)\s*[x\*]\s*([\d\.]+)\s*\=?\s*([\d\.]+)?\s*(.*)$/gim.exec(v);
+        if (r) {
+            gr=(r[1] || '0').toUpperCase();
+            klistino[gr]={ x: parseFloat(r[2]), y: parseFloat(r[3]), pr: parseFloat(r[4] || 0),  cm: r[5] };
+        }
+    }
+    console.log(klistino)
+}
 function parseDati(dati) {
     var res = {
         sps: 0,
-        fx: 3000,
-        fy: 2000,
         fogli: [],
         tagli: [],
     }
@@ -56,10 +73,7 @@ function parseDati(dati) {
                 if (r[1] == '!') {
                     if (gr) {
                         res.fogli.push({ gr, x: parseFloat(r[2]), y: parseFloat(r[3]), n: parseInt(r[4] || 50), cm: r[5] });
-                    } else {
-                        res.fx = parseFloat(r[2]);
-                        res.fy = parseFloat(r[3])
-                    }
+                    } 
                 } else {
                     if (gr)
                         res.tagli.push({ gr, x: parseFloat(r[2]), y: parseFloat(r[3]), n: parseInt(r[4] || 1), rq: rq, cm: r[5] });
@@ -80,7 +94,10 @@ function parseDati(dati) {
     for (var gr of sgr) {
         var f = res.fogli.filter(a => a.gr == gr);
         if (f.length == 0) {
-            res.fogli.push({ gr, x: res.fx, y: res.fy, n: 50, cm: '#auto' })
+            var k=klistino[gr];
+            if (!k) k=klistino['*'];
+            if (!k) k={x:3000,y:2000}
+            res.fogli.push({ gr, x: k.x, y: k.y, n: 50, cm: '#auto' })
         }
     }
     return res;
@@ -124,7 +141,6 @@ function datiString(res) {
 
 function showliste() {
     var el = getel("liste");
-    console.log("showliste", el);
     el.innerHTML = "";
     if (!liste.list.includes(".lastdata")) liste.list.unshift(".lastdata");
     for (var x of liste.list) {
@@ -136,8 +152,11 @@ function showliste() {
 
 function getinidata() {
     liste = getStorage(".liste", liste);
+    if (!liste.listino) liste.listino=`* 3000x2000 prova generico`
     getel("dati").value = getStorage(liste.nome, esempio);
     getel("nome").value = liste.nome;
+    getel("listino").value = liste.listino;
+    parseListino();
     showliste();
 }
 function menuset(n) {
@@ -190,5 +209,11 @@ function btcarica() {
         setStorage(".liste", liste);
         getel("dati").value = getStorage(liste.nome, esempio);
     }
+}
 
+function btsalvalistino() {
+    liste.listino = getel("listino").value;
+    setStorage(".liste", liste);
+    parseListino();  
+  
 }

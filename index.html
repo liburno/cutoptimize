@@ -11,7 +11,7 @@
     <script src="ott.js"></script>
     <script src="dom.js"></script>
     <script src="index.js"></script>
-    
+
 </head>
 <body>
     <div id="container">
@@ -21,16 +21,17 @@
             <div id="menu">
                 <div class="voce"><a href="#" onclick="menuset(0)">Misure</a></div>
                 <div class="voce"><a href="#" onclick="menuset(1)">Tagli</a></div>
+                <div class="voce"><a href="#" onclick="menuset(2)">Listino</a></div>
                 <div class="voce"><a href="#" onclick="menuset(3)">Aiuto</a></div>
             </div>
-            
+
             <div id="pag0" class="pagina">
                 <h2>Imposta Misure
                 </h2>
-                
+
                 <label for="">Schemi Salvati:</label>
                 <select name="" id="liste" class="tarea"">
-                    <option value="a">prima</option>
+                    <option value=" a">prima</option>
                     <option value="b">sec</option>
                     <option value="c">ter</option>
                 </select>
@@ -46,26 +47,40 @@
                 </p>
                 <p class="help">se devi inserire le misure di un foglio scrivi come un pannello ma precedi con !: !(lunghezza)x(larghezza)=(qt)</p>
                 <p class="help">il comando "!sps xx" da lo spessore della lama/sfrido, default 8mm</p>
-                
+
                 <label for="">Dati:</label>
-                <textarea id="dati"  rows="200" class="tarea"></textarea>
+                <textarea id="dati" rows="200" class="tarea"></textarea>
             </div>
             <div id="pag1" class="pagina">
                 <h2>Taglio:</h2>
                 <p>Materiale: <span class="evi" id="fogliomat"></span></p>
                 <p>Dimensioni: <span class="evi" id="fogliodim"></span></p>
-               
+
                 <p>Nr.: <span class="evi" id="foglioid"></span></p>
                 <p>Resa: <span class="evi" id="foglioresa"></span> %</p>
                 <p>Tagli Y:</p>
                 <pre id="fogliomisure">
                 </pre>
                 <p class="help">Premere freccia sx o dx per scorrere</p>
+                <h2>Riepilogo</h2>
+                <pre id="riep"></pre>
            
                 <h2>Mancanti</h2>
                 <pre id="mancanti"></pre>
             </div>
             <div id="pag2" class="pagina">
+                <h2>Listino Fogli
+                </h2>
+
+                <button onclick="btsalvalistino()">Salva</button>
+                <p class="help">
+                    Indicare per ogni riga le dimensioni dei fogli da tagliare e il prezzo a mq: (SIGLA) (lunghezza) x (larghezza) = (prezzo/mq).
+                </p>
+                <p class="help">Questo archivio generico sarà utilizzato da ogni ottimizzazione, come dimensioni di default
+                </p>
+
+                <label for="">Dati:</label>
+                <textarea id="listino" rows="200" class="tarea"></textarea>
             </div>
             <div id="pag3" class="pagina">
                 <h2>Help</h2>
@@ -77,9 +92,9 @@
                 <p>Tito.</p>
             </div>
         </div>
-    
+
     </div>
-   
+
 
 </body>
 </html>

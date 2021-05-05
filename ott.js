@@ -185,11 +185,36 @@ class Ott {
                 manca[k]++;
             }
         }
+        // mancanti
         var rr = [];
         for (var m in manca) {
             rr.push(`${m} = ${manca[m]}`)
         }
+        // fogli usati:
         getel("mancanti").innerText = rr.join('\n');
+        rr=[]
+        var tot=0;
+        var tx={}
+        for (var f of this.fgx) {
+            if (f.misure) {
+                var ll=klistino[f.sigla];
+                if (!ll) ll=klistino['*']
+                if (!ll) ll={x:0,y:0,pr:0,cm:"undef"}
+                if (!tx[f.sigla]) {
+                    tx[f.sigla]={fg:0,mq:0,pr:ll.pr,cm:ll.cm}
+                }
+                var t=tx[f.sigla]
+                t.fg++;
+                t.mq+=f.x*f.y/1000000;
+            }
+        }
+        for (var x in tx) {
+            var t=tx[x];
+            rr.push(`${x} nr.${t.fg} mq:${Math.floor(t.mq*1000)/1000} pr: ${Math.floor(t.mq*t.pr)}  ${t.cm}`);
+            tot+=Math.floor(t.mq*t.pr);
+        }
+        rr.push(`TOTALE: ${tot} `);
+        getel("riep").innerText = rr.join('\n');
 
     }
     filler(x, y, tg) {

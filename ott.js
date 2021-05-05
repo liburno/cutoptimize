@@ -5,11 +5,11 @@ class Ott {
         this.fgx = [];
         for (var t of tm.fogli) {
             var n = t.n || 1;
-            if (t.rq) n*=t.rq;
+            if (t.rq) n *= t.rq;
             for (var i = 0; i < n; i++) {
                 mx = mx > t.x ? mx : t.x;
                 my = my > t.y ? my : t.y;
-                var nn = new Pann(t.x, t.y, t.gr);
+                var nn = new Pann(t.x, t.y, t.gr, t.cm);
                 nn.foglio = this.fgx.length;
                 this.fgx.push(nn);
             }
@@ -22,9 +22,9 @@ class Ott {
         var id = 1;
         for (var t of tm.tagli) {
             var n = t.n || 1;
-            if (t.rq) n*=t.rq;
-             for (var i = 0; i < n; i++) {
-                var nn = new Pann(t.x, t.y, t.gr)
+            if (t.rq) n *= t.rq;
+            for (var i = 0; i < n; i++) {
+                var nn = new Pann(t.x, t.y, t.gr, t.cm)
                 nn.id = id++;
                 this.tg.push(nn);
             }
@@ -93,7 +93,7 @@ class Ott {
         return Math.floor(tm * 10000 / totale) / 100;
     }
 
-// inizio ottimizzatore di taglio!
+    // inizio ottimizzatore di taglio!
 
     ottimizza() {
         this.reset();
@@ -101,29 +101,29 @@ class Ott {
         for (var x of this.tg) {
             mats.add(x.sigla);
         }
-        var matfoglio=1;
+        var matfoglio = 1;
         mats = [...mats].sort();
         for (var mat of mats) {
 
-            var fgx=this.fgx.filter(e=>e.sigla==mat);
+            var fgx = this.fgx.filter(e => e.sigla == mat);
 
             for (var foglio of fgx) {
                 var fx = foglio.x;
                 var fy = foglio.y;
                 var y0 = 0;
-                var idf=foglio.foglio
+                var idf = foglio.foglio
 
-                var tf = this.tg.filter(e => e.sigla==mat && e.foglio == -1); // finite le ottimizzazioni!
+                var tf = this.tg.filter(e => e.sigla == mat && e.foglio == -1); // finite le ottimizzazioni!
                 if (!tf || tf.length == 0) {
                     break;
                 }
                 for (var xx = 0; xx < 20; xx++) {
 
-                    var tg = this.tg.filter(e => e.y <= fy && e.sigla==mat && e.foglio == -1);
+                    var tg = this.tg.filter(e => e.y <= fy && e.sigla == mat && e.foglio == -1);
                     if (!tg || tg.length == 0) {
                         break;
                     }
-                    tg = tg.sort((a, b) => b.x*b.y - a.x*a.y);
+                    tg = tg.sort((a, b) => b.x * b.y - a.x * a.y);
                     for (var t of tg) t.used = false;
                     // prendi fino a tre misure diverse cerca di costruire una barra;
                     bx = [];
@@ -141,7 +141,7 @@ class Ott {
                         var x0 = 0;
                         if (!foglio.misure) {
                             foglio.misure = [];
-                            foglio.mat=matfoglio++;
+                            foglio.mat = matfoglio++;
                         }
                         var x00 = x0;
                         var by = bx[0].y * 1.2;
@@ -173,23 +173,23 @@ class Ott {
                 }
             }
         }
-        this.curfoglio=this.fgx.length-1;
+        this.curfoglio = this.fgx.length - 1;
         this.movefoglio(1);
-        var manca={};
+        var manca = {};
         for (var p of this.tg) {
-            if (p.foglio==-1) {
-                var k=`${p.sigla}  ${p.x}x${p.y}`
+            if (p.foglio == -1) {
+                var k = `${p.sigla}  ${p.x}x${p.y}`
                 if (!manca[k]) {
-                    manca[k]=0
+                    manca[k] = 0
                 }
                 manca[k]++;
             }
         }
-        var rr=[];
+        var rr = [];
         for (var m in manca) {
             rr.push(`${m} = ${manca[m]}`)
         }
-        getel("mancanti").innerText=rr.join('\n');
+        getel("mancanti").innerText = rr.join('\n');
 
     }
     filler(x, y, tg) {

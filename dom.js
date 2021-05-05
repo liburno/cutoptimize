@@ -51,7 +51,7 @@ function parseDati(dati) {
         if (r) {
             res.sps = parseFloat(r[1]);
         } else {
-            var r = /^\s*(\!)?([\d\.]+)\s*x\s*([\d\.]+)\s*\=?\s*([\d\.]+)?\s*(.*)$/gim.exec(v);
+            var r = /^\s*(\!)?([\d\.]+)\s*[x\*]\s*([\d\.]+)\s*\=?\s*([\d\.]+)?\s*(.*)$/gim.exec(v);
             if (r) {
                 if (r[1] == '!') {
                     if (gr) {

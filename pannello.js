@@ -1,11 +1,12 @@
 class Pann {
-    constructor(x,y,sigla='0') {
+    constructor(x,y,sigla='0',cm='') {
         this.foglio=-1;
         this.sigla=sigla;
         this.x=x;
         this.y=y;
         this.px=0
         this.py=0;
+        this.cm=cm;
     }
     isin(x,y) {
         x=(x-ox)/scala;
@@ -24,7 +25,17 @@ class Pann {
             textSize(9);
             noStroke();
             fill(0);
-            text(`${this.x}x${this.y}`,(this.px+this.x/2)*scala+ox,(this.py+this.y/2)*scala+oy)
+            var py=(this.py+this.y/2)*scala+oy;
+            text(`${this.x}x${this.y}`,(this.px+this.x/2)*scala+ox,py)
+            fill("blue");
+            textSize(8);
+            if (!this.cm.startsWith('#') && !this.cm.startsWith('//') ) {
+                var vv=(this.cm || '').split(/[\!\|\,]/);
+                for (var v of vv) {
+                    py+=10;
+                    text(v,(this.px+this.x/2)*scala+ox,py)
+                }
+            }
         }
     }
 
